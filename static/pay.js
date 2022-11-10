@@ -1,11 +1,19 @@
 document.addEventListener("DOMContentLoaded", function(){
     var aprendizajesCheckbox = document.getElementById("aprendizajes-checkbox");
     var proyectarCheckbox = document.getElementById("proyectar-checkbox");
-    var cursosTextBox = document.getElementById("description")
+    var cursosTextBox = document.getElementById("description");
+    var formPago = document.getElementById("pagoForm");
+
+    var cursoError = document.getElementById("cursoError");
+    var correoError = document.getElementById("correoError");
+    var curpError = document.getElementById("curpError");
+    var nombreError = document.getElementById("nombreError");
 
     aprendizajesCheckbox.addEventListener('change',function () {
         var preciosBoxVal = parseInt(document.getElementById("amount").value);
         var preciosBox = document.getElementById("amount");
+        cursoError.setAttribute('style', cursoError.getAttribute('style') + ';visibility:hidden;');
+
         if (this.checked) {
             cursosTextBox.value = cursosTextBox.value + " Aprendizajes";
             preciosBox.value = (preciosBoxVal + 100).toString();
@@ -24,6 +32,9 @@ document.addEventListener("DOMContentLoaded", function(){
     proyectarCheckbox.addEventListener('change',function () {
         var preciosBoxVal = parseInt(document.getElementById("amount").value);
         var preciosBox = document.getElementById("amount");
+
+        cursoError.setAttribute('style', cursoError.getAttribute('style') + ';visibility:hidden;');
+
         if (this.checked) {
             cursosTextBox.value = cursosTextBox.value + " Proyectar";
             preciosBox.value = (preciosBoxVal + 100).toString();
@@ -39,7 +50,47 @@ document.addEventListener("DOMContentLoaded", function(){
          }
     })
 
+    var nombreInput = document.getElementById("nombreCliente");
+
+    nombreInput.addEventListener('change',function () {
+        nombreError.setAttribute('style', nombreError.getAttribute('style') + ';visibility:hidden;');
+    })
+
+    var curpInput = document.getElementById("curpCliente");
+
+    curpInput.addEventListener('change',function () {
+        curpError.setAttribute('style', curpError.getAttribute('style') + ';visibility:hidden;');
+    })
+
+    var correoInput = document.getElementById("correoCliente");
+
+    correoInput.addEventListener('change',function () {
+        correoError.setAttribute('style', correoError.getAttribute('style') + ';visibility:hidden;');
+    })
+
     paypal.Buttons({
+
+
+    // Handle errors
+    onError: function (err) {
+        if (!aprendizajesCheckbox.checked && !proyectarCheckbox.checked) {
+            cursoError.style.removeProperty("visibility");
+        }
+
+        if (!formPago.reportValidity()) {
+                if(document.getElementById("correoCliente").value === ""){
+                    correoError.style.removeProperty("visibility");
+                }
+
+                if(document.getElementById("curpCliente").value === ""){
+                    curpError.style.removeProperty("visibility");
+                }
+
+                if(document.getElementById("nombreCliente").value === ""){
+                    nombreError.style.removeProperty("visibility");
+                }
+            }
+        },
 
     // Set up the transaction
     createOrder: function(data, actions) {

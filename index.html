@@ -166,7 +166,7 @@
         <div id="pago">
             <h2 class="text-3xl mb-6 font-bold tracking-tight text-[#1f1135] sm:text-3xl md:text-4xl text-center">Ingresa tus datos</h2>
             <div class="block p-6 rounded-lg shadow-lg bg-[#e2daeb] max-w-md mx-auto">
-                <form>
+                <form id="pagoForm">
                     <div class="form-group mb-6 pl-16 xs:pl-16 sm:pl-16 md:pl-16 lg:pl-16">
                         <h3 class="text-lg font-bold mb-4">Selecciona el curso que deseas:</h3>
                         <div class="flex items-center">
@@ -177,11 +177,11 @@
                         </div>
                     </div>
                     <div class="form-group mb-6">
-                        <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="nombreCliente"
+                        <input required type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="nombreCliente"
                             placeholder="Nombre">
                     </div>
                     <div class="form-group mb-6">
-                        <input type="text" class="form-control block
+                        <input required type="text" class="form-control block
                       w-full
                       px-3
                       py-1.5
@@ -216,7 +216,7 @@
                     </div>
 
                     <div class="form-group mb-6">
-                        <input type="email" class="form-control block
+                        <input required type="email" class="form-control block
                       w-full
                       px-3
                       py-1.5
@@ -274,19 +274,18 @@
                     transition
                     duration-150
                     ease-in-out">Send</button> -->
+
+                    <div id="smart-button-container">
+                        <div style="text-align: center"><label for="description">Cursos </label><input type="text" name="descriptionInput" id="description" maxlength="127" value="" readonly="readonly"></div>
+                        <div style="text-align: center" class="mt-2"><label for="amount">Precio </label><input name="amountInput" type="number" id="amount" value="0" readonly="readonly"><span> MXN</span></div>
+                          <p id="cursoError" style="visibility: hidden; color:red; text-align: center;">Selecciona un curso primero</p>
+                          <p id="nombreError" style="visibility: hidden; color:red; text-align: center;">Necesitas ingresar un nombre</p>
+                          <p id="curpError" style="visibility: hidden; color:red; text-align: center;">Necesitas ingresar un CURP</p>
+                          <p id="correoError" style="visibility: hidden; color:red; text-align: center;">Necesitas ingresar un correo electrónico</p>
+                        <div style="text-align: center; margin-top: 0.625rem;" id="paypal-button-container"></div>
+                      </div>
+                      <script src="https://www.paypal.com/sdk/js?client-id=AUhZP1VGDsu1F9oEvJ0gy9WDpeQP3f7US9CbqTm01giDR45IaJwWQMkyRH2hVTmZ4VgQxVQVj-2ceppn&currency=MXN"></script>
                 </form>
-
-                <div id="smart-button-container">
-                    <div style="text-align: center"><label for="description">Cursos </label><input type="text" name="descriptionInput" id="description" maxlength="127" value="" readonly="readonly"></div>
-                      <p id="descriptionError" style="visibility: hidden; color:red; text-align: center;">Please enter a description</p>
-                    <div style="text-align: center"><label for="amount">Precio </label><input name="amountInput" type="number" id="amount" value="0" readonly="readonly"><span> MXN</span></div>
-                      <p id="priceLabelError" style="visibility: hidden; color:red; text-align: center;">Please enter a price</p>
-                    <div id="invoiceidDiv" style="text-align: center; display: none;"><label for="invoiceid"> </label><input name="invoiceid" maxlength="127" type="text" id="invoiceid" value="" ></div>
-                      <p id="invoiceidError" style="visibility: hidden; color:red; text-align: center;">Please enter an Invoice ID</p>
-                    <div style="text-align: center; margin-top: 0.625rem;" id="paypal-button-container"></div>
-                  </div>
-                  <script src="https://www.paypal.com/sdk/js?client-id=AUhZP1VGDsu1F9oEvJ0gy9WDpeQP3f7US9CbqTm01giDR45IaJwWQMkyRH2hVTmZ4VgQxVQVj-2ceppn&currency=MXN"></script>
-
 
             </div>
         </div>
